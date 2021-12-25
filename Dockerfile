@@ -1,0 +1,1 @@
+FROM everypreciousday/functionalbigdata:latest
