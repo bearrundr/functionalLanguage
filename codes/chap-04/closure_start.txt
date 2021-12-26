@@ -1,0 +1,13 @@
+#leiningen
+lein repl
+
+#project start
+lein new app my-app
+
+# command cli 
+1. add the following to ~/.lein/profile.clj
+{:user {:plugins [[lein-exec "0.3.7"]]}}
+
+2. command execute 
+2.1 lein exec xxxx.clj  or
+2.2 cat xxx.clj | lein exec 
