@@ -1,0 +1,15 @@
+;; delete odd element 
+(defun filter-odd (input-list)
+  (if (null input-list)
+     0 
+       (if (= 0 (rem (car input-list) 2))
+          (delete (car input-list))
+          (filter-odd (CDR input-list))
+       )
+   )
+)
+(defvar x-list '(3 4 5))
+;;(write (filter-odd '(3 4 5)) )
+(write x-list)
+(format t ":")
+(write (filter-odd x-list) )

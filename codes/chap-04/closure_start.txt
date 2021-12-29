@@ -10,4 +10,11 @@ lein new app my-app
 
 2. command execute 
 2.1 lein exec xxxx.clj  or
-2.2 cat xxx.clj | lein exec 
+2.2 cat xxx.clj | lein exec  or
+2.3 cat xxx.clj | lein repl
+   in case 2.3, we don't need exec plugin
+
+3. create project
+lein new app practice
+cd practice
+lein run 
