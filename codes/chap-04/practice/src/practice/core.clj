@@ -82,6 +82,73 @@
 
 )
 
+(defn repeatst [] 
+   (println "repeatst")
+
+   (println "dotimes")
+   (dotimes [x 5]
+      (println x)
+   )
+
+   (println "loop and recur")
+   (loop [x 1 ret 0]
+     (if (> x 10)
+        (println "ret=" ret)
+        (recur (inc x) (+ x ret))))
+
+)
+
+(defn factorial1 [n]
+   (if (= 1 n) 1
+       (* n (factorial1 (dec n))))
+)
+
+(defn factorial2 [x]
+   (loop [n x prod 1]
+     (if (= n 1) prod
+         (recur (dec n) (* prod n))))
+) 
+
+(require '[clojure.string :as str])
+(defn map_and_mapcat []
+   (println "map and mapcat compare")
+   (println "map")
+   (map 
+      (fn [line] (str/split line #" "))
+      '("a b", "c d"))
+
+   (mapcat
+      (fn [line] (str/split line #" "))
+      '("a b c", "d e f"))
+
+)
+
+(def content (slurp "/textfile"))
+(def line_list (str/split content #"\n"))
+(def word_list 
+    (mapcat
+       (fn [line] (str/split line #" "))
+       line_list)
+)
+    
+(defn word_listfn [] 
+     (println word_list)
+)
+
+(defn reducefn []
+  (println "reducefn")
+
+  (println 
+     (reduce 
+       (fn [acc_map elem]
+          (if (nil? (get acc_map elem))
+             (assoc acc_map elem 1)
+             (update acc_map elem inc)))
+        {}
+        word_list)
+  )
+)
+
 (defn -main
   [& args]
   (println "chap 04 clojure")
@@ -100,4 +167,15 @@
   (println "(sum-of-list '(1 2 3 4 5))=" (sum-of-list '(1 2 3 4 5)))
   (println "(max-of-list '(4 3 2 5 1))=" (max-of-list '(4 3 2 5 1)))
   (println "(my-map (fn [x] (+ x 1))) '(1 2 3))=" (my-map (fn [x] (+ x 1)) '(1 2 3)) )
+
+  (repeatst)
+
+  (println "factorial1[4]=" (factorial1 4))
+  (println "factorial2[4]=" (factorial2 4))
+ 
+  (map_and_mapcat)
+ 
+  (word_listfn)
+ 
+  (reducefn)
 )
